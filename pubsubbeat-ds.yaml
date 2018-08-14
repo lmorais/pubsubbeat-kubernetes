@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: pubsubbeat
+  namespace: kube-system
+  labels:
+    k8s-app: pubsubbeat
+spec:
+  selector:
+    matchLabels:
+      name: pubsubbeat
+  template:
+    metadata:
+      labels:
+        name: pubsubbeat
+    spec:
+      containers:
+      - name: pubsubbeat
+        image: <your-image-repository>
+        resources:
+          limits:
+            memory: 200Mi
+          requests:
+            cpu: 100m
+            memory: 200Mi
+      terminationGracePeriodSeconds: 30
